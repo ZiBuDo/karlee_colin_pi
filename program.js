@@ -158,7 +158,8 @@ function create() {
 
         function addSprite() {
             const skin = config.skins[skins[config.skin]];
-            config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth, skin.y ? skin.y : 500, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
+            config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth, 
+                window.innerHeight - (skin.y ? skin.y : 500), `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
                 .setScale(skin.scale ? skin.scale : 6)
                 .setInteractive({
                     draggable: true
