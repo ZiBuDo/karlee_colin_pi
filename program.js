@@ -37,35 +37,30 @@ const sprites = {
                 width: 64,
                 height: 64,
                 frames: [1, 5, 9, 13],
-                scale: 4,
-                y: 550
+                scale: 4
             },
             gray: {
                 height: 117,
                 width: 165,
                 frames: [0, 1, 2],
-                scale: 1,
-                y: 575
+                scale: 1
             },
             nyan: {
                 height: 20,
                 width: 58.8,
                 frames: [0, 1, 2, 3, 4],
-                scale: 4,
-                y: 585
+                scale: 4
             },
             sleeping: {
                 height: 160,
                 width: 192.5,
                 frames: [0, 1, 2, 3],
-                scale: 1,
-                y: 550
+                scale: 1
             },
             tiger: {
                 height: 56,
                 width: 56,
-                scale: 4,
-                y: 530
+                scale: 4
             }
         },
         sprite: null,
@@ -158,9 +153,9 @@ function create() {
 
         function addSprite() {
             const skin = config.skins[skins[config.skin]];
-            //scene.add.sprite(positions[config.position] * window.innerWidth, 
-            //window.innerHeight - (skin.y ? skin.y : 500), `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
-            config.sprite = scene.add.sprite(0, 0, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
+            // window.innerHeight - (skin.y ? skin.y : 500)
+            config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth, 
+                100, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
                 .setScale(skin.scale ? skin.scale : 6)
                 .setInteractive({
                     draggable: true
