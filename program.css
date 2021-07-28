@@ -1,0 +1,9 @@
+canvas {
+    margin: -15px;
+    height: 103%;
+    width: 105%;
+}
+
+body {
+    overflow: hidden;
+}
