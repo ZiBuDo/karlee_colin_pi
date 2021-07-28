@@ -158,8 +158,9 @@ function create() {
 
         function addSprite() {
             const skin = config.skins[skins[config.skin]];
-            config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth, 
-                window.innerHeight - (skin.y ? skin.y : 500), `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
+            //scene.add.sprite(positions[config.position] * window.innerWidth, 
+            //window.innerHeight - (skin.y ? skin.y : 500), `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
+            config.sprite = scene.add.sprite(0, 0, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
                 .setScale(skin.scale ? skin.scale : 6)
                 .setInteractive({
                     draggable: true
@@ -219,29 +220,29 @@ function create() {
 
     function addBackground() {
         bg = scene.add.image(window.innerWidth / 2, window.innerHeight / 2, backgrounds[background]).setDisplaySize(window.innerWidth * 1.3, window.innerHeight).setDepth(-1);
-        camera.pan(window.innerWidth * 1.3 / 2, window.innerHeight / 2, 10000, "Sine.easeInOut", false, function (cam, progress) {
-            Object.keys(sprites).forEach(key => {
-                const config = sprites[key];
-                const skins = Object.keys(config.skins);
-                const skin = config.skins[skins[config.skin]];
-                const diff = (window.innerWidth * 1.3 / 2) - (window.innerWidth / 2);
-                config.sprite.setPosition((positions[config.position] * window.innerWidth) + (diff * progress), skin.y ? skin.y : 500);
-            });
+        // camera.pan(window.innerWidth * 1.3 / 2, window.innerHeight / 2, 10000, "Sine.easeInOut", false, function (cam, progress) {
+        //     Object.keys(sprites).forEach(key => {
+        //         const config = sprites[key];
+        //         const skins = Object.keys(config.skins);
+        //         const skin = config.skins[skins[config.skin]];
+        //         const diff = (window.innerWidth * 1.3 / 2) - (window.innerWidth / 2);
+        //         config.sprite.setPosition((positions[config.position] * window.innerWidth) + (diff * progress), skin.y ? skin.y : 500);
+        //     });
 
-            if (progress === 1) {
-                background = background + 1;
-                if (background === backgrounds.length) {
-                    background = 0;
-                }
-                camera.setPosition(0, 0);
-                camera.centerOn(window.innerWidth / 2, window.innerHeight / 2);
-                camera.setScroll(0, 0);
-                setTimeout(() => {
-                    bg.destroy(true);
-                    addBackground();
-                });
-            }
-        });
+        //     if (progress === 1) {
+        //         background = background + 1;
+        //         if (background === backgrounds.length) {
+        //             background = 0;
+        //         }
+        //         camera.setPosition(0, 0);
+        //         camera.centerOn(window.innerWidth / 2, window.innerHeight / 2);
+        //         camera.setScroll(0, 0);
+        //         setTimeout(() => {
+        //             bg.destroy(true);
+        //             addBackground();
+        //         });
+        //     }
+        // });
     }
     camera.setPosition(0, 0);
     camera.centerOn(window.innerWidth / 2, window.innerHeight / 2);
