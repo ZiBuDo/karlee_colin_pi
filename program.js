@@ -37,25 +37,29 @@ const sprites = {
                 width: 64,
                 height: 64,
                 frames: [1, 5, 9, 13],
-                scale: 4
+                scale: 4,
+                offset: 24
             },
             gray: {
                 height: 117,
                 width: 165,
                 frames: [0, 1, 2],
-                scale: 1
+                scale: 1,
+                offset: -32
             },
             nyan: {
                 height: 20,
                 width: 58.8,
                 frames: [0, 1, 2, 3, 4],
-                scale: 4
+                scale: 4,
+                offset: -32
             },
             sleeping: {
                 height: 160,
                 width: 192.5,
                 frames: [0, 1, 2, 3],
-                scale: 1
+                scale: 1,
+                offset: -32
             },
             tiger: {
                 height: 56,
@@ -153,9 +157,8 @@ function create() {
 
         function addSprite() {
             const skin = config.skins[skins[config.skin]];
-            // window.innerHeight - (skin.y ? skin.y : 500)
-            config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth, 
-                100, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
+            config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth,
+                    ((skin.offset ? skin.offset : 0) + window.innerHeight) - ((skin.height ? skin.height : 48) * (skin.scale ? skin.scale : 6)) / 2, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
                 .setScale(skin.scale ? skin.scale : 6)
                 .setInteractive({
                     draggable: true
@@ -215,29 +218,30 @@ function create() {
 
     function addBackground() {
         bg = scene.add.image(window.innerWidth / 2, window.innerHeight / 2, backgrounds[background]).setDisplaySize(window.innerWidth * 1.3, window.innerHeight).setDepth(-1);
-        // camera.pan(window.innerWidth * 1.3 / 2, window.innerHeight / 2, 10000, "Sine.easeInOut", false, function (cam, progress) {
-        //     Object.keys(sprites).forEach(key => {
-        //         const config = sprites[key];
-        //         const skins = Object.keys(config.skins);
-        //         const skin = config.skins[skins[config.skin]];
-        //         const diff = (window.innerWidth * 1.3 / 2) - (window.innerWidth / 2);
-        //         config.sprite.setPosition((positions[config.position] * window.innerWidth) + (diff * progress), skin.y ? skin.y : 500);
-        //     });
+        camera.pan(window.innerWidth * 1.3 / 2, window.innerHeight / 2, 10000, "Sine.easeInOut", false, function (cam, progress) {
+            Object.keys(sprites).forEach(key => {
+                const config = sprites[key];
+                const skins = Object.keys(config.skins);
+                const skin = config.skins[skins[config.skin]];
+                const diff = (window.innerWidth * 1.3 / 2) - (window.innerWidth / 2);
+                config.sprite.setPosition((positions[config.position] * window.innerWidth) + (diff * progress), 
+                    ((skin.offset ? skin.offset : 0) + window.innerHeight) - ((skin.height ? skin.height : 48) * (skin.scale ? skin.scale : 6)) / 2);
+            });
 
-        //     if (progress === 1) {
-        //         background = background + 1;
-        //         if (background === backgrounds.length) {
-        //             background = 0;
-        //         }
-        //         camera.setPosition(0, 0);
-        //         camera.centerOn(window.innerWidth / 2, window.innerHeight / 2);
-        //         camera.setScroll(0, 0);
-        //         setTimeout(() => {
-        //             bg.destroy(true);
-        //             addBackground();
-        //         });
-        //     }
-        // });
+            if (progress === 1) {
+                background = background + 1;
+                if (background === backgrounds.length) {
+                    background = 0;
+                }
+                camera.setPosition(0, 0);
+                camera.centerOn(window.innerWidth / 2, window.innerHeight / 2);
+                camera.setScroll(0, 0);
+                setTimeout(() => {
+                    bg.destroy(true);
+                    addBackground();
+                });
+            }
+        });
     }
     camera.setPosition(0, 0);
     camera.centerOn(window.innerWidth / 2, window.innerHeight / 2);
