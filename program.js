@@ -44,21 +44,21 @@ const sprites = {
                 width: 165,
                 frames: [0, 1, 2],
                 scale: 1/3,
-                offset: -32
+                offset: -10
             },
             nyan: {
                 height: 20,
                 width: 58.8,
                 frames: [0, 1, 2, 3, 4],
                 scale: 1,
-                offset: -32
+                offset: -10
             },
             sleeping: {
                 height: 160,
                 width: 192.5,
                 frames: [0, 1, 2, 3],
                 scale: 1/3,
-                offset: -24
+                offset: -10
             },
             tiger: {
                 height: 56,
@@ -97,7 +97,7 @@ const sprites = {
 const defaultScale = 2;
 const defaultHeight = 48;
 const defaultWidth = 32;
-const defaultOffset = -16;
+const defaultOffset = -115;
 
 $(function () {
     new Phaser.Game({
@@ -162,7 +162,7 @@ function create() {
         function addSprite() {
             const skin = config.skins[skins[config.skin]];
             config.sprite = scene.add.sprite(positions[config.position] * window.innerWidth,
-                    ((skin.offset ? skin.offset : defaultOffset) + window.innerHeight) - ((skin.height ? skin.height : defaultHeight) * (skin.scale ? skin.scale : 6)) / 2, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
+                    ((defaultOffset + (skin.offset ? skin.offset : 0)) + window.innerHeight) - ((skin.height ? skin.height : defaultHeight) * (skin.scale ? skin.scale : 6)) / 2, `${key}-${skins[config.skin]}`).play(`walk-${key}-${skins[config.skin]}`)
                 .setScale(skin.scale ? skin.scale : defaultScale)
                 .setInteractive({
                     draggable: true
@@ -229,7 +229,7 @@ function create() {
                 const skin = config.skins[skins[config.skin]];
                 const diff = (window.innerWidth * 1.3 / 2) - (window.innerWidth / 2);
                 config.sprite.setPosition((positions[config.position] * window.innerWidth) + (diff * progress),
-                    ((skin.offset ? skin.offset : defaultOffset) + window.innerHeight) - ((skin.height ? skin.height : defaultHeight) * (skin.scale ? skin.scale : defaultScale)) / 2);
+                    ((defaultOffset + (skin.offset ? skin.offset : 0)) + window.innerHeight) - ((skin.height ? skin.height : defaultHeight) * (skin.scale ? skin.scale : defaultScale)) / 2);
             });
 
             if (progress === 1) {
@@ -245,7 +245,7 @@ function create() {
                     const skins = Object.keys(config.skins);
                     const skin = config.skins[skins[config.skin]];
                     config.sprite.setPosition((positions[config.position] * window.innerWidth),
-                        ((skin.offset ? skin.offset : defaultOffset) + window.innerHeight) - ((skin.height ? skin.height : defaultHeight) * (skin.scale ? skin.scale : defaultScale)) / 2);
+                        ((defaultOffset + (skin.offset ? skin.offset : 0)) + window.innerHeight) - ((skin.height ? skin.height : defaultHeight) * (skin.scale ? skin.scale : defaultScale)) / 2);
                 });
                 setTimeout(() => {
                     bg.destroy(true);
