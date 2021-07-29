@@ -37,27 +37,27 @@ const sprites = {
                 width: 64,
                 height: 64,
                 frames: [1, 5, 9, 13],
-                scale: 2
+                scale: 1.5
             },
             gray: {
                 height: 117,
                 width: 165,
                 frames: [0, 1, 2],
-                scale: 3/4,
+                scale: 1/2,
                 offset: -10
             },
             nyan: {
                 height: 20,
                 width: 58.8,
                 frames: [0, 1, 2, 3, 4],
-                scale: 2,
+                scale: 1.5,
                 offset: -10
             },
             sleeping: {
                 height: 160,
                 width: 192.5,
                 frames: [0, 1, 2, 3],
-                scale: 3/4,
+                scale: 1/2,
                 offset: -10
             },
             tiger: {
@@ -94,10 +94,10 @@ const sprites = {
     }
 };
 
-const defaultScale = 4;
+const defaultScale = 3;
 const defaultHeight = 48;
 const defaultWidth = 32;
-const defaultOffset = -55;
+const defaultOffset = -30;
 
 $(function () {
     new Phaser.Game({
