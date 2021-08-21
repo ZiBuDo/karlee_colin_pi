@@ -1,29 +1,73 @@
 const backgrounds = [
+    "Akira.jpeg",
+    "Akira2.jpeg",
     "anime_red.jpg",
     "anime1.jpg",
+    "asukara.jpeg",
     "aya_and_the_witch.jpg",
+    "Blood_Blockade_Battlefront.png",
+    "Blood_Blockade_Battlefront2.png",
     "botw.jpg",
     "botw2.jpg",
     "cherryblossoms.jpg",
     "cow_boy_bepop.jpg",
     "fruits_basket.jpg",
+    "garden_of_worlds.jpeg",
+    "garden_of_worlds2.png",
     "ghibli.jpg",
     "ghibli_totoro.png",
     "ghibli2.jpg",
+    "grimgar.jpeg",
+    "grimgar2.jpeg",
+    "grimgar3.jpeg",
+    "howls_castle2.jpeg",
     "howls_moving_castle.jpg",
     "jirachi.png",
+    "kaguya2.jpeg",
     "king_arthur.png",
+    "madoka_magica.jpeg",
     "my_hero.png",
     "naruto_field.jpg",
     "naruto_hokages.png",
     "persona.jpg",
+    "pixel_80s.jpg",
+    "pixel_cherry.jpg",
+    "pixel_coffee.jpg",
+    "pixel_colorful.jpg",
+    "pixel_country_road.png",
+    "pixel_country_side.jpg",
+    "pixel_dojo.jpg",
+    "pixel_fall.png",
+    "pixel_fuji.jpg",
+    "pixel_ghost.jpg",
+    "pixel_japan.png",
+    "pixel_jungle.jpg",
+    "pixel_lake.png",
+    "pixel_night.jpg",
+    "pixel_town.jpg",
+    "pixel_train.jpg",
+    "pixel_white.jpg",
+    "pixel_winter.png",
     "pokemon.jpg",
     "pokemon_classic.png",
+    "princess_kaguya.jpeg",
     "psycho_pass.jpg",
+    "psycho_pass2.jpeg",
+    "psycho_pass3.jpeg",
+    "psycho_pass4.jpeg",
+    "space_dandy.png",
+    "space_dandy2.jpeg",
+    "space_dandy3.jpeg",
+    "space_dandy4.jpeg",
+    "space_dandy5.jpeg",
+    "tenkon_kinkreet.jpeg",
+    "tenkon_kinkreet2.jpeg",
+    "tenkon_kinkreet3.jpeg",
     "undertale.jpg",
-    "undertale_snow.png"
+    "undertale_snow.png",
 ];
 let background = 0;
+let backgroundLoaded = 0;
 
 /**
  * colin + karlee
@@ -43,7 +87,7 @@ const sprites = {
                 height: 117,
                 width: 165,
                 frames: [0, 1, 2],
-                scale: 1/2,
+                scale: 1 / 2,
                 offset: -10
             },
             nyan: {
@@ -57,7 +101,7 @@ const sprites = {
                 height: 160,
                 width: 192.5,
                 frames: [0, 1, 2, 3],
-                scale: 1/2,
+                scale: 1 / 2,
                 offset: -10
             },
             tiger: {
@@ -129,9 +173,28 @@ function preload() {
         });
     });
 
-    backgrounds.forEach(bg => {
-        scene.load.image(bg, `/journey/backgrounds/${bg}`);
-    });
+    loadBackgrounds(scene, true);
+}
+
+
+
+function loadBackgrounds(scene, init){
+    if(backgroundLoaded >= backgrounds.length){
+        return init ? null : scene.load.start();
+    }
+    scene.load.image(backgrounds[backgroundLoaded], `/journey/backgrounds/${backgrounds[backgroundLoaded]}`);
+    backgroundLoaded = backgroundLoaded + 1;
+    if(backgroundLoaded >= backgrounds.length){
+        return init ? null : scene.load.start();
+    }
+    scene.load.image(backgrounds[backgroundLoaded], `/journey/backgrounds/${backgrounds[backgroundLoaded]}`);
+    backgroundLoaded = backgroundLoaded + 1;
+    if(backgroundLoaded >= backgrounds.length){
+        return init ? null : scene.load.start();
+    }
+    scene.load.image(backgrounds[backgroundLoaded], `/journey/backgrounds/${backgrounds[backgroundLoaded]}`);
+    backgroundLoaded = backgroundLoaded + 1;
+    return init ? null : scene.load.start();
 }
 
 function create() {
@@ -233,6 +296,7 @@ function create() {
             });
 
             if (progress === 1) {
+                loadBackgrounds(scene);
                 background = background + 1;
                 if (background === backgrounds.length) {
                     background = 0;
