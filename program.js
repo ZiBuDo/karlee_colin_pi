@@ -296,7 +296,6 @@ function create() {
             });
 
             if (progress === 1) {
-                loadBackgrounds(scene);
                 background = background + 1;
                 if (background === backgrounds.length) {
                     background = 0;
@@ -314,6 +313,9 @@ function create() {
                 setTimeout(() => {
                     bg.destroy(true);
                     addBackground();
+                    setTimeout(() => {
+                        loadBackgrounds(scene);
+                    });
                 });
             }
         });
